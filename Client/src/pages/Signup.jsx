@@ -1,0 +1,169 @@
+
+import { Link } from "react-router-dom";
+import {
+  User,
+  AtSign,
+  Mail,
+  Lock,
+} from "lucide-react";
+
+function Signup() {
+  return (
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-6 py-12">
+
+      <div className="w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900 p-10 shadow-2xl">
+
+        <div className="text-center">
+
+          <h1 className="text-4xl font-bold text-white">
+            Create Account 🚀
+          </h1>
+
+          <p className="mt-3 text-slate-400">
+            Join PrepPilot AI and start your placement journey.
+          </p>
+
+        </div>
+
+        <form className="mt-10 space-y-6">
+
+          {/* Full Name */}
+
+          <div>
+
+            <label className="mb-2 block text-sm text-slate-300">
+              Full Name
+            </label>
+
+            <div className="flex items-center rounded-xl border border-slate-700 px-4">
+
+              <User className="text-slate-400" size={20} />
+
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                className="w-full bg-transparent p-4 text-white outline-none"
+              />
+
+            </div>
+
+          </div>
+
+          {/* Username */}
+
+          <div>
+
+            <label className="mb-2 block text-sm text-slate-300">
+              Username
+            </label>
+
+            <div className="flex items-center rounded-xl border border-slate-700 px-4">
+
+              <AtSign className="text-slate-400" size={20} />
+
+              <input
+                type="text"
+                placeholder="Choose a username"
+                className="w-full bg-transparent p-4 text-white outline-none"
+              />
+
+            </div>
+
+          </div>
+
+          {/* Email */}
+
+          <div>
+
+            <label className="mb-2 block text-sm text-slate-300">
+              Email
+            </label>
+
+            <div className="flex items-center rounded-xl border border-slate-700 px-4">
+
+              <Mail className="text-slate-400" size={20} />
+
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full bg-transparent p-4 text-white outline-none"
+              />
+
+            </div>
+
+          </div>
+
+          {/* Password */}
+
+          <div>
+
+            <label className="mb-2 block text-sm text-slate-300">
+              Password
+            </label>
+
+            <div className="flex items-center rounded-xl border border-slate-700 px-4">
+
+              <Lock className="text-slate-400" size={20} />
+
+              <input
+                type="password"
+                placeholder="Create password"
+                className="w-full bg-transparent p-4 text-white outline-none"
+              />
+
+            </div>
+
+          </div>
+
+          {/* Confirm Password */}
+
+          <div>
+
+            <label className="mb-2 block text-sm text-slate-300">
+              Confirm Password
+            </label>
+
+            <div className="flex items-center rounded-xl border border-slate-700 px-4">
+
+              <Lock className="text-slate-400" size={20} />
+
+              <input
+                type="password"
+                placeholder="Confirm password"
+                className="w-full bg-transparent p-4 text-white outline-none"
+              />
+
+            </div>
+
+          </div>
+
+          {/* Button */}
+
+          <button
+            className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-semibold text-white transition hover:bg-cyan-400"
+          >
+            Create Account
+          </button>
+
+        </form>
+
+        <div className="mt-8 text-center text-slate-400">
+
+          Already have an account?{" "}
+
+          <Link
+            to="/login"
+            className="font-semibold text-cyan-400 hover:underline"
+          >
+            Login
+          </Link>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+export default Signup;
