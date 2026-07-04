@@ -1,16 +1,169 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🚀 PrepPilot AI
 
-Currently, two official plugins are available:
+An AI-powered interview preparation platform that helps students prepare for software engineering interviews with personalized roadmaps, DSA tracking, notes, analytics, and mock interview assistance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Status:** 🚧 Currently under active development
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 📚 Personalized DSA Roadmap
+- ✅ DSA Progress Tracker
+- 📝 Notes Management
+- 🤖 AI Study Assistant
+- 💬 Mock Interview Practice
+- 📊 Performance Analytics
+- 🔍 Topic-wise Question Tracking
+- 📅 Daily Learning Streak
+- 🌙 Modern & Responsive UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React.js
+- Vite
+- Tailwind CSS
+- React Router
+
+### Backend *(Coming Soon)*
+
+- Node.js
+- Express.js
+- JWT Authentication
+- REST API
+
+### Database *(Coming Soon)*
+
+- MongoDB
+- Mongoose
+
+### Deployment *(Planned)*
+
+- Vercel (Frontend)
+- Render / Railway (Backend)
+- MongoDB Atlas
+
+---
+
+## 📁 Project Structure
+
+```text
+PrepPilot-AI/
+│
+├── client/          # React Frontend
+├── server/          # Express Backend
+├── docs/            # Documentation
+└── README.md
+```
+
+---
+
+## 🚀 Current Progress
+
+- [x] Project Setup
+- [x] GitHub Repository
+- [x] React + Vite Setup
+- [x] Tailwind CSS Setup
+- [x] Responsive Navbar
+- [ ] Hero Section
+- [ ] Features Section
+- [ ] Authentication
+- [ ] Dashboard
+- [ ] Backend APIs
+- [ ] Database Integration
+- [ ] AI Integration
+- [ ] Deployment
+
+---
+
+## 🎯 Project Goal
+
+PrepPilot AI aims to become an all-in-one platform for interview preparation by combining:
+
+- DSA Practice
+- AI-powered Guidance
+- Progress Tracking
+- Personalized Learning
+- Mock Interviews
+- Analytics Dashboard
+
+---
+
+## 📸 Screenshots
+
+> Screenshots will be added as development progresses.
+
+---
+
+## 🧑‍💻 Getting Started
+
+### Clone Repository
+
+```bash
+git clone https://github.com/amitScript/preppilot-ai.git
+```
+
+### Go to Client
+
+```bash
+cd preppilot-ai/client
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 📌 Development Workflow
+
+Each feature is developed in the following order:
+
+1. UI Development
+2. Backend APIs
+3. Database Integration
+4. Frontend-Backend Connection
+5. Testing & Optimization
+
+---
+
+## 📅 Roadmap
+
+- Responsive Landing Page
+- Authentication
+- Dashboard
+- DSA Tracker
+- Notes
+- AI Assistant
+- Mock Interview
+- Analytics
+- Deployment
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and feedback are welcome.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you like this project, don't forget to star the repository.
