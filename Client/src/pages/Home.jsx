@@ -12,6 +12,7 @@ import Footer from "../components/Footer/Footer";
 
 
 
+
 function Home() {
   return (
     <>
@@ -29,5 +30,7 @@ function Home() {
     </>
   );
 }
+
+ 
 
 export default Home;
