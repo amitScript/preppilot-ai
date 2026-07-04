@@ -1,11 +1,20 @@
 
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 
+
+// function App() {
+//   return <Home />;
+// }
+
+
+
+// export default App;
+
+
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return <Home />;
+  return <AppRoutes />;
 }
-
-
 
 export default App;
