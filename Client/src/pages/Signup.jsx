@@ -1,5 +1,6 @@
-
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   User,
   AtSign,
@@ -8,6 +9,62 @@ import {
 } from "lucide-react";
 
 function Signup() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      alert(response.data.message);
+
+      navigate("/login");
+
+    }
+     catch (error) {
+  console.log(error);
+  console.log(error.response);
+  console.log(error.response?.data);
+
+  alert(error.response?.data?.message || error.message);
+    
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-6 py-12">
 
@@ -25,7 +82,10 @@ function Signup() {
 
         </div>
 
-        <form className="mt-10 space-y-6">
+        <form
+          className="mt-10 space-y-6"
+          onSubmit={handleSubmit}
+        >
 
           {/* Full Name */}
 
@@ -41,8 +101,12 @@ function Signup() {
 
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Enter your full name"
                 className="w-full bg-transparent p-4 text-white outline-none"
+                required
               />
 
             </div>
@@ -63,6 +127,9 @@ function Signup() {
 
               <input
                 type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
                 placeholder="Choose a username"
                 className="w-full bg-transparent p-4 text-white outline-none"
               />
@@ -85,8 +152,12 @@ function Signup() {
 
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
                 className="w-full bg-transparent p-4 text-white outline-none"
+                required
               />
 
             </div>
@@ -107,8 +178,12 @@ function Signup() {
 
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Create password"
                 className="w-full bg-transparent p-4 text-white outline-none"
+                required
               />
 
             </div>
@@ -129,8 +204,12 @@ function Signup() {
 
               <input
                 type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 placeholder="Confirm password"
                 className="w-full bg-transparent p-4 text-white outline-none"
+                required
               />
 
             </div>
@@ -140,9 +219,11 @@ function Signup() {
           {/* Button */}
 
           <button
-            className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-semibold text-white transition hover:bg-cyan-400"
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-semibold text-white transition hover:bg-cyan-400 disabled:opacity-50"
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
 
         </form>
