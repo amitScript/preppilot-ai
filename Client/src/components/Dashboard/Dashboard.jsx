@@ -1,10 +1,38 @@
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import Navbar from "../Navbar/Navbar";
 import DashboardCard from "./DashboardCard";
 import ProgressCard from "./ProgressCard";
 import QuickActions from "./QuickActions";
 
 function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          "http://localhost:5000/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setUser(response.data.user);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -13,11 +41,11 @@ function Dashboard() {
       <div className="mx-auto max-w-7xl px-6 py-10">
 
         <h1 className="text-4xl font-bold">
-          Welcome, {user?.name} 👋
+          Welcome, {user?.name || "User"} 👋
         </h1>
 
         <p className="mt-2 text-slate-400">
-          Track your placement preparation from one place.
+          {user?.email || "Loading..."}
         </p>
 
         {/* Top Cards */}
@@ -41,7 +69,6 @@ function Dashboard() {
         </div>
 
         {/* Progress + Actions */}
-
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
 
           <ProgressCard />
