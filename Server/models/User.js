@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -20,6 +21,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
+    },
+
+    // Resume File Path
+    resume: {
+      type: String,
+      default: "",
+    },
+
+    // Resume Score (Future AI Analysis)
+    resumeScore: {
+      type: Number,
+      default: 0,
     },
   },
   {

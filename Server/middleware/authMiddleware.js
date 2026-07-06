@@ -1,10 +1,12 @@
+
 import jwt from "jsonwebtoken";
 
 export const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
-    // Check token
+    console.log("Authorization:", authHeader);
+
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
@@ -12,17 +14,22 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Extract token
     const token = authHeader.split(" ")[1];
 
-    // Verify token
+    console.log("Token:", token);
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Save user id in request
+    console.log("Decoded:", decoded);
+
     req.user = decoded.id;
+
+    console.log("req.user:", req.user);
 
     next();
   } catch (error) {
+    console.log(error);
+
     return res.status(401).json({
       success: false,
       message: "Invalid Token",

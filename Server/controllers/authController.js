@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
+import mongoose from "mongoose";
 // ======================
 // Signup Controller
 // ======================
@@ -124,6 +124,71 @@ export const getMe = async (req, res) => {
 
   } catch (error) {
     res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// ======================
+// Upload Resume
+// ======================
+
+
+
+
+export const uploadResume = async (req, res) => {
+  try {
+    console.log("Database Name =", mongoose.connection.name);
+
+    const users = await User.find();
+
+    console.log("Total Users =", users.length);
+
+    console.log(users);
+    console.log("========== UPLOAD ==========");
+    console.log("req.user =", req.user);
+    console.log("req.file =", req.file);
+
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No resume uploaded",
+      });
+    }
+
+    // Pehle check karte hain database me kya users hain
+    const allUsers = await User.find().select("_id name email");
+
+    console.log("All Users =", allUsers);
+
+    // Ab jis id se search kar rahe hain
+    const user = await User.findById(req.user);
+
+    console.log("Found User =", user);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    user.resume = req.file.path;
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Resume uploaded successfully",
+      resume: user.resume,
+    });
+
+  } catch (error) {
+    console.log("UPLOAD ERROR =", error);
+
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
