@@ -2,6 +2,8 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import extractTextFromPDF from "../utils/pdfParser.js";
+import { analyzeResume } from "../services/geminiService.js";
 // ======================
 // Signup Controller
 // ======================
@@ -136,20 +138,13 @@ export const getMe = async (req, res) => {
 // ======================
 
 
-
-
 export const uploadResume = async (req, res) => {
   try {
-    console.log("Database Name =", mongoose.connection.name);
-
-    const users = await User.find();
-
-    console.log("Total Users =", users.length);
-
-    console.log(users);
-    console.log("========== UPLOAD ==========");
-    console.log("req.user =", req.user);
-    console.log("req.file =", req.file);
+    console.log("===============");
+    console.log("BODY :", req.body);
+    console.log("FILE :", req.file);
+    console.log("USER :", req.user);
+    console.log("===============");
 
     if (!req.file) {
       return res.status(400).json({
@@ -158,15 +153,8 @@ export const uploadResume = async (req, res) => {
       });
     }
 
-    // Pehle check karte hain database me kya users hain
-    const allUsers = await User.find().select("_id name email");
-
-    console.log("All Users =", allUsers);
-
-    // Ab jis id se search kar rahe hain
+    // Find Logged-in User
     const user = await User.findById(req.user);
-
-    console.log("Found User =", user);
 
     if (!user) {
       return res.status(404).json({
@@ -175,20 +163,40 @@ export const uploadResume = async (req, res) => {
       });
     }
 
-    user.resume = req.file.path;
+    // Save Resume Path
+    user.resume = `/uploads/${req.file.filename}`;
+
+    // Extract Resume Text
+    const resumeText = await extractTextFromPDF(req.file.path);
+
+    console.log("========== RESUME TEXT ==========");
+    console.log(resumeText);
+    console.log("=================================");
+
+    // Analyze Resume using Gemini
+    const analysis = await analyzeResume(resumeText);
+
+    console.log("========== ATS ANALYSIS ==========");
+    console.log(analysis);
+    console.log("==================================");
+
+    // Save Analysis
+    user.resumeScore = analysis.score;
+    user.resumeFeedback = analysis;
 
     await user.save();
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Resume uploaded successfully",
       resume: user.resume,
+      analysis,
     });
 
   } catch (error) {
-    console.log("UPLOAD ERROR =", error);
+    console.log(error);
 
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });

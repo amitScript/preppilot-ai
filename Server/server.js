@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({
   path: path.join(__dirname, ".env"),
 });
-
+console.log(process.env.GEMINI_API_KEY);
 const app = express();
 
 console.log("JWT =", process.env.JWT_SECRET);

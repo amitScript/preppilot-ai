@@ -34,6 +34,13 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+
+     // ATS Analysis
+   resumeFeedback: {
+     type: Object,
+      default: {},
+
+  },
   },
   {
     timestamps: true,
